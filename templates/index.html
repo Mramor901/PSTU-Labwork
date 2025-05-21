@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Главная страница</title>
+</head>
+<body>
+    <h1>Учебные дисциплины</h1>
+    {% for course in courses %}
+        <div>
+            <h2><a href="{{ url_for('course_detail', course_id=course.id) }}">{{ course.title }}</a></h2>
+            <p>{{ course.description }}</p>
+        </div>
+    {% endfor %}
+
+    <!-- Меню по регистрации и авторизации -->
+    <div>
+        {% if session.get('user_id') %}
+            <a href="{{ url_for('logout') }}">Выйти</a>
+        {% else %}
+            <a href="{{ url_for('register') }}">Регистрация</a>
+            <a href="{{ url_for('login') }}">Вход</a>
+        {% endif %}
+    </div>
+</body>
+</html>
